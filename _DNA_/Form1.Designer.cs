@@ -39,6 +39,8 @@
             this.txtResult = new System.Windows.Forms.RichTextBox();
             this.lblResult = new System.Windows.Forms.Label();
             this.btnClearAfter = new System.Windows.Forms.Button();
+            this.btnfromFile = new System.Windows.Forms.Button();
+            this.lstBoxPDFcurrent = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // txtmautin
@@ -138,11 +140,32 @@
             this.btnClearAfter.UseVisualStyleBackColor = true;
             this.btnClearAfter.Click += new System.EventHandler(this.btnClearAfter_Click);
             // 
+            // btnfromFile
+            // 
+            this.btnfromFile.Location = new System.Drawing.Point(322, 26);
+            this.btnfromFile.Name = "btnfromFile";
+            this.btnfromFile.Size = new System.Drawing.Size(91, 23);
+            this.btnfromFile.TabIndex = 11;
+            this.btnfromFile.Text = "From File PDF";
+            this.btnfromFile.UseVisualStyleBackColor = true;
+            this.btnfromFile.Click += new System.EventHandler(this.btnfromFile_Click);
+            // 
+            // lstBoxPDFcurrent
+            // 
+            this.lstBoxPDFcurrent.FormattingEnabled = true;
+            this.lstBoxPDFcurrent.Location = new System.Drawing.Point(478, 13);
+            this.lstBoxPDFcurrent.Name = "lstBoxPDFcurrent";
+            this.lstBoxPDFcurrent.Size = new System.Drawing.Size(118, 134);
+            this.lstBoxPDFcurrent.TabIndex = 12;
+            this.lstBoxPDFcurrent.SelectedIndexChanged += new System.EventHandler(this.lstBoxPDFcurrent_SelectedIndexChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(684, 351);
+            this.Controls.Add(this.lstBoxPDFcurrent);
+            this.Controls.Add(this.btnfromFile);
             this.Controls.Add(this.btnClearAfter);
             this.Controls.Add(this.lblResult);
             this.Controls.Add(this.txtResult);
@@ -174,6 +197,10 @@
         private System.Windows.Forms.RichTextBox txtResult;
         private System.Windows.Forms.Label lblResult;
         private System.Windows.Forms.Button btnClearAfter;
+        private System.Windows.Forms.Button btnfromFile;
+        private System.Windows.Forms.ListBox lstBoxPDFcurrent;
+        private System.Windows.Forms.RichTextBox txtInputWord;
+        private System.Windows.Forms.TextBox txtPDf;
     }
 }
 

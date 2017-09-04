@@ -8,6 +8,9 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Spire.Pdf;
+using _DNA_;
+using System.Diagnostics;
 
 namespace _DNA_
 {
@@ -359,6 +362,57 @@ namespace _DNA_
         private void btnClearAfter_Click(object sender, EventArgs e)
         {
             lstlblAfter.Items.Clear();
+        }
+
+        private void btnfromFile_Click(object sender, EventArgs e)
+        {
+            var AC = new Microsoft.Office.Interop.Word.Application();
+
+            var doc = new Microsoft.Office.Interop.Word.Document();
+
+            object readOnly = false;
+
+            object isVisible = true;
+
+            object missing = System.Reflection.Missing.Value;
+            var docx = new PdfDocument();
+            var openFile = new OpenFileDialog();
+            if (openFile.ShowDialog() == DialogResult.OK)
+            {
+                docx.LoadFromFile(openFile.FileName);
+            }
+            object fn = System.IO.Path.GetDirectoryName(openFile.FileName) + @"\output.doc";
+
+            docx.SaveToFile("" + fn, FileFormat.DOC);
+            try
+            {
+                doc = AC.Documents.Open(ref fn, ref missing, ref readOnly, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref missing, ref isVisible, ref isVisible, ref missing, ref missing, ref missing);
+                var strResult = "";
+                //var test = doc.Content.Characters.Count;
+                txtInputWord.Text = doc.Content.Text;
+                for (var i = 1; i <= doc.Content.Characters.Count; i++)
+                {
+                    var text = doc.Content.Characters[i].Text;
+                    if (text == " " || text == "\r") continue;
+                    var color = (Color)WdColorColorConverter.Convert(doc.Content.Characters[i].Font.Color, null, null, null);
+                    strResult += text + " " + color.R + " " + color.G + " " + color.B + " " + doc.Content.Characters[i].Font.Color + "    ";
+                    txtInputWord.Select(i - 1, 1);
+                    txtInputWord.SelectionColor = color;
+                }
+                txtPDf.Text = strResult;
+            }
+
+            catch (Exception ex)
+
+            {
+
+            }
+            Process.Start("WINWORD.EXE", "" + fn);
+        }
+
+        private void lstBoxPDFcurrent_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
